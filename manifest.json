@@ -14,11 +14,18 @@
 		},
 		"default_title": "Toggle YouTube Playlist Autoplay"
 	},
+	"content_scripts": [
+		{
+			"matches": ["*://*.youtube.com/*"],
+			"js": ["content.js"],
+			"run_at": "document_end"
+		}
+	],
 	"description": "Allows the user to turn off/on autoplay for playlists on YouTube.",
 	"icons": {
 		"128": "icons/Logo-128.png"
 	},
 	"name": "No Playlist Autoplay For YouTube",
 	"permissions": ["storage", "tabs", "*://*.youtube.com/*"],
-	"version": "65535.65535.65535.0"
+	"version": "65535.65535.65535.1"
 }
