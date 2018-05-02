@@ -26,6 +26,7 @@
 		"128": "icons/Logo-128.png"
 	},
 	"name": "No Playlist Autoplay For YouTube",
-	"permissions": ["storage", "tabs", "*://*.youtube.com/*"],
-	"version": "65535.65535.65535.1"
+	"options_page": "options.html",
+	"permissions": ["storage", "*://*.youtube.com/*"],
+	"version": "65535.65535.65535.2"
 }

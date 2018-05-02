@@ -1,11 +1,24 @@
-chrome.storage.local.get('autoplay', function(result) {
-	setAutoplay(result.autoplay);
-});
+chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
+	
+	if (!result.autoplay) { //do not allow autoplay
+		result.frequency = result.frequency < 1000 ? 1000 : result.frequency;
 
-function setAutoplay(bool) {
-	//adds code as a script tag so it can interact with the DOM
-	var script = document.createElement("script");
-	script.type = "text/javascript";
-	script.innerText = "document.getElementsByTagName('yt-playlist-manager')[0].canAutoAdvance_ = " + bool + ";";
-	document.body.appendChild(script);
-}
+		var script = document.createElement("script");
+		script.id = "npafy-script";
+		script.type = "text/javascript";
+		script.innerText += "(function() {";
+		script.innerText += "	var ypm;";
+		script.innerText += "	function f() {";
+		script.innerText += "		if (ypm) {";
+		script.innerText += "			ypm.canAutoAdvance_ = false;";
+		script.innerText += "		} else {";
+		script.innerText += "			ypm = document.getElementsByTagName('yt-playlist-manager')[0];";
+		script.innerText += "		}";
+		script.innerText += "	}";
+		script.innerText += "	f();";
+		script.innerText += "	setInterval(f, " + result.frequency + ");";
+		script.innerText += "})();";
+
+		document.body.appendChild(script);
+	}
+});
