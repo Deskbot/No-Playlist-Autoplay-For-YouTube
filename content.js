@@ -1,7 +1,11 @@
 chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
 	
 	if (!result.autoplay) { //do not allow autoplay
-		result.frequency = result.frequency < 1000 ? 1000 : result.frequency;
+		if (result.frequency) {
+			result.frequency = result.frequency < 1000 ? 1000 : result.frequency;
+		} else {
+			result.frequency = 6000; //sometimes the data is lost by chrome
+		}
 
 		var script = document.createElement("script");
 		script.id = "npafy-script";
