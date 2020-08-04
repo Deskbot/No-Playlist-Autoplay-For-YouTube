@@ -24,7 +24,7 @@ chrome.runtime.onStartup.addListener(function() {
 	});
 });
 
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.browserAction.onClicked.addListener(function() {
 	chrome.storage.local.get('autoplay', function(result) {
 		if (result.autoplay) {
 			setIcon('icons/Pause-38.png');
