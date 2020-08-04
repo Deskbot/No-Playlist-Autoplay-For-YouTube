@@ -14,6 +14,16 @@ chrome.runtime.onInstalled.addListener(function() {
 	chrome.storage.local.set({'frequency' : 5000});
 });
 
+chrome.runtime.onStartup.addListener(function() {
+	chrome.storage.local.get('autoplay', function(result) {
+		if (result.autoplay) {
+			setIcon('icons/Play-38.png');
+		} else {
+			setIcon('icons/Pause-38.png');
+		}
+	});
+});
+
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.storage.local.get('autoplay', function(result) {
 		if (result.autoplay) {
