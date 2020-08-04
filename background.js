@@ -8,6 +8,14 @@ function setIcon(path) {
 	chrome.browserAction.setIcon({path: path});
 }
 
+function setIconToMatchAutoplay(autoplay) {
+	if (autoplay) {
+		setIcon('icons/Play-38.png');
+	} else {
+		setIcon('icons/Pause-38.png');
+	}
+}
+
 chrome.runtime.onInstalled.addListener(function() {
 	saveState(false);
 
@@ -16,22 +24,14 @@ chrome.runtime.onInstalled.addListener(function() {
 
 chrome.runtime.onStartup.addListener(function() {
 	chrome.storage.local.get('autoplay', function(result) {
-		if (result.autoplay) {
-			setIcon('icons/Play-38.png');
-		} else {
-			setIcon('icons/Pause-38.png');
-		}
+		setIconToMatchAutoplay(result.autoplay);
 	});
 });
 
 chrome.browserAction.onClicked.addListener(function() {
 	chrome.storage.local.get('autoplay', function(result) {
-		if (result.autoplay) {
-			setIcon('icons/Pause-38.png');
-		} else {
-			setIcon('icons/Play-38.png');
-		}
-
-		saveState(!result.autoplay);
+		const newAutoplayState = !result.autoplay
+		setIconToMatchAutoplay(newAutoplayState);
+		saveState(newAutoplayState);
 	});
 });
