@@ -27,11 +27,11 @@ chrome.runtime.onStartup.addListener(function() {
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.storage.local.get('autoplay', function(result) {
 		if (result.autoplay) {
-			saveState(false);
 			setIcon('icons/Pause-38.png');
 		} else {
-			saveState(true);
 			setIcon('icons/Play-38.png');
 		}
+
+		saveState(!result.autoplay);
 	});
 });
