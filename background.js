@@ -8,20 +8,30 @@ function setIcon(path) {
 	chrome.browserAction.setIcon({path: path});
 }
 
+function setIconToMatchAutoplay(autoplay) {
+	if (autoplay) {
+		setIcon('icons/Play-38.png');
+	} else {
+		setIcon('icons/Pause-38.png');
+	}
+}
+
 chrome.runtime.onInstalled.addListener(function() {
 	saveState(false);
 
 	chrome.storage.local.set({'frequency' : 5000});
 });
 
-chrome.browserAction.onClicked.addListener(function(tab) {
+chrome.runtime.onStartup.addListener(function() {
 	chrome.storage.local.get('autoplay', function(result) {
-		if (result.autoplay) {
-			saveState(false);
-			setIcon('icons/Pause-38.png');
-		} else {
-			saveState(true);
-			setIcon('icons/Play-38.png');
-		}
+		setIconToMatchAutoplay(result.autoplay);
+	});
+});
+
+chrome.browserAction.onClicked.addListener(function() {
+	chrome.storage.local.get('autoplay', function(result) {
+		const newAutoplayState = !result.autoplay
+		setIconToMatchAutoplay(newAutoplayState);
+		saveState(newAutoplayState);
 	});
 });
