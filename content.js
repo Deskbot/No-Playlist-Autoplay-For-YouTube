@@ -10,19 +10,21 @@ chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
 		var script = document.createElement("script");
 		script.id = "npafy-script";
 		script.type = "text/javascript";
-		script.innerText += "(function() {";
-		script.innerText += "	var ypm;";
-		script.innerText += "	function f() {";
-		script.innerText += "		if (ypm) {";
-		script.innerText += "			ypm.canAutoAdvance_ = false;";
-		script.innerText += "		} else {";
-		script.innerText += "			ypm = document.getElementsByTagName('yt-playlist-manager')[0];";
-		script.innerText += "			ypm.canAutoAdvance_ = false;";
-		script.innerText += "		}";
-		script.innerText += "	}";
-		script.innerText += "	f();";
-		script.innerText += "	setInterval(f, " + result.frequency + ");";
-		script.innerText += "})();";
+		script.innerText += [
+			"(function() {",
+			"	var ypm;",
+			"	function f() {",
+			"		if (ypm) {",
+			"			ypm.canAutoAdvance_ = false;",
+			"		} else {",
+			"			ypm = document.getElementsByTagName('yt-playlist-manager')[0];",
+			"			ypm.canAutoAdvance_ = false;",
+			"		}",
+			"	}",
+			"	f();",
+			"	setInterval(f, " + result.frequency + ");",
+			"})();"
+		].join("\n")
 
 		document.body.appendChild(script);
 	}
