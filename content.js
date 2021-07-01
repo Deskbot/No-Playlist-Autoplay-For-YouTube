@@ -2,9 +2,9 @@ chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
 
 	if (!result.autoplay) { //do not allow autoplay
 		if (result.frequency) {
-			result.frequency = result.frequency < 1000 ? 1000 : result.frequency;
+			result.frequency = result.frequency < 250 ? 250 : result.frequency;
 		} else {
-			result.frequency = 5000; //sometimes the data is lost by chrome
+			result.frequency = 500; //sometimes the data is lost by chrome
 		}
 
 		var script = document.createElement("script");
