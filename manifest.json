@@ -35,5 +35,5 @@
 	"name": "No Playlist Autoplay For YouTube",
 	"options_page": "options.html",
 	"permissions": ["storage", "*://*.youtube.com/*"],
-	"version": "65535.65535.65535.5"
+	"version": "65535.65535.65535.6"
 }
