@@ -1,5 +1,5 @@
 chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
-	
+
 	if (!result.autoplay) { //do not allow autoplay
 		if (result.frequency) {
 			result.frequency = result.frequency < 1000 ? 1000 : result.frequency;
@@ -17,6 +17,7 @@ chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
 		script.innerText += "			ypm.canAutoAdvance_ = false;";
 		script.innerText += "		} else {";
 		script.innerText += "			ypm = document.getElementsByTagName('yt-playlist-manager')[0];";
+		script.innerText += "			ypm.canAutoAdvance_ = false;";
 		script.innerText += "		}";
 		script.innerText += "	}";
 		script.innerText += "	f();";
