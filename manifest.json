@@ -28,7 +28,7 @@
 			"run_at": "document_end"
 		}
 	],
-	"description": "Allows the user to turn off/on autoplay for playlists on YouTube.",
+	"description": "You can turn autoplay off/on for playlists on YouTube. Refresh YouTube after toggling.",
 	"icons": {
 		"128": "icons/Logo-128.png"
 	},
