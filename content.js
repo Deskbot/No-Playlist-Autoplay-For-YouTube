@@ -1,5 +1,4 @@
 chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
-
 	if (!result.autoplay) { //do not allow autoplay
 		if (result.frequency) {
 			result.frequency = result.frequency < 250 ? 250 : result.frequency;
@@ -10,19 +9,19 @@ chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
 		var script = document.createElement("script");
 		script.id = "npafy-script";
 		script.type = "text/javascript";
-		script.innerText += [
+		script.innerText = [
 			"(function() {",
 			"	var ypm;",
-			"	function f() {",
-			"		if (ypm) {",
-			"			ypm.canAutoAdvance_ = false;",
-			"		} else {",
+			"	function noAutoAdvance() {",
+			"		if (!ypm) {",
 			"			ypm = document.getElementsByTagName('yt-playlist-manager')[0];",
+			"		}",
+			"		if (ypm) {",
 			"			ypm.canAutoAdvance_ = false;",
 			"		}",
 			"	}",
-			"	f();",
-			"	setInterval(f, " + result.frequency + ");",
+			"	noAutoAdvance();",
+			"	setInterval(noAutoAdvance, " + result.frequency + ");",
 			"})();"
 		].join("\n")
 
