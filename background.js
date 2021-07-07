@@ -1,7 +1,7 @@
 //background chrome handlers
 
 function saveState(state) {
-	chrome.storage.local.set({'poop': state});
+	chrome.storage.local.set({'autoplay': state});
 }
 
 function setIcon(path) {
@@ -19,17 +19,17 @@ function setIconToMatchAutoplay(autoplay) {
 chrome.runtime.onInstalled.addListener(function() {
 	saveState(false);
 
-	chrome.storage.local.set({'pee' : 500});
+	chrome.storage.local.set({'frequency' : 500});
 });
 
 chrome.runtime.onStartup.addListener(function() {
-	chrome.storage.local.get('poop', function(result) {
+	chrome.storage.local.get('autoplay', function(result) {
 		setIconToMatchAutoplay(result.autoplay);
 	});
 });
 
 chrome.browserAction.onClicked.addListener(function() {
-	chrome.storage.local.get('poop', function(result) {
+	chrome.storage.local.get('autoplay', function(result) {
 		const newAutoplayState = !result.autoplay
 		setIconToMatchAutoplay(newAutoplayState);
 		saveState(newAutoplayState);
