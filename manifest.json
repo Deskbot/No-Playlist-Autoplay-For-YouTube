@@ -28,7 +28,7 @@
 			"run_at": "document_end"
 		}
 	],
-	"description": "You can turn autoplay off/on for playlists on YouTube. Refresh YouTube after toggling.",
+	"description": "With this extension, when you reach the end of a video in a playlist, the next video is prevented from playing automatically.\n\nYou can toggle autoplay on and off. Refresh YouTube after toggling.",
 	"icons": {
 		"128": "icons/Logo-128.png"
 	},
