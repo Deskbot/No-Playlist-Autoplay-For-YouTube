@@ -1,16 +1,7 @@
-chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
-	if (result.autoplay) {
-		// autoplay is wanted
-		return
-	}
+var script;
 
-	if (result.frequency) {
-		result.frequency = result.frequency < 250 ? 250 : result.frequency;
-	} else {
-		result.frequency = 500; // sometimes the data is lost by chrome
-	}
-
-	var script = document.createElement("script");
+function insertScript(frequency) {
+	script = document.createElement("script");
 	script.id = "npafy-script";
 	script.type = "text/javascript";
 	script.innerText = [
@@ -25,10 +16,43 @@ chrome.storage.local.get(['autoplay', 'frequency'], function(result) {
 		"		}",
 		"	}",
 		"	noAutoAdvance();",
-		"	setInterval(noAutoAdvance, " + result.frequency + ");",
+		"	setInterval(noAutoAdvance, " + frequency + ");",
 		"})();"
 	].join("\n")
 
 	document.body.appendChild(script);
+}
 
-});
+function removeScript() {
+	// var ypm = document.getElementById("npafy-script");
+	// document.body.removeChild(ypm);
+
+	if (script) {
+		document.body.removeChild(script);
+	}
+}
+
+var lastAutoplay;
+setInterval(function () {
+	chrome.storage.local.get(['autoplay', 'frequency'], function (result) {
+		var frequency = result.frequency;
+		if (frequency) {
+			frequency = frequency < 250 ? 250 : frequency;
+		} else {
+			frequency = 500; // sometimes the data is lost by chrome
+		}
+
+		if (lastAutoplay !== result.autoplay) {
+			lastAutoplay = result.autoplay;
+
+			if (result.autoplay) {
+				console.log("remove")
+				removeScript();
+			} else {
+				console.log("insert")
+				insertScript(frequency)
+			}
+		}
+	})
+}, 500)
+
