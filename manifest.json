@@ -28,7 +28,7 @@
 			"run_at": "document_end"
 		}
 	],
-	"description": "With this extension, when you reach the end of a video in a playlist, the next video is prevented from playing automatically.\n\nYou can toggle autoplay on and off. Refresh YouTube after toggling.",
+	"description": "When you finish a video in a playlist, the next video won't start unless you click on it.\nYou can toggle this on and off.",
 	"icons": {
 		"128": "icons/Logo-128.png"
 	},
