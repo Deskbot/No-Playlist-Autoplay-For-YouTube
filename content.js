@@ -15,7 +15,7 @@ function setAutoplay(autoplay) {
 				ypm = document.getElementsByTagName('yt-playlist-manager')[0];
 			}
 			if (ypm) {
-				ypm.canAutoAdvance_ = ${autoplay};
+				ypm.TEST_ONLY.setCanAutoAdvance(${autoplay});
 			}
 		})();
 	`;
@@ -40,4 +40,3 @@ chrome.storage.local.get(['frequency'], function (result) {
 	setInterval(checkAutoplay, frequency); // make sure nothing switches it back
 	checkAutoplay();
 })
-
