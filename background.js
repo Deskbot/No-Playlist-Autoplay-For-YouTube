@@ -19,7 +19,7 @@ function setIconToMatchAutoplay(autoplay) {
 chrome.runtime.onInstalled.addListener(function() {
 	saveState(false);
 
-	chrome.storage.local.set({'frequency' : 10000});
+	chrome.storage.local.set({'frequency' : 500});
 });
 
 chrome.runtime.onStartup.addListener(function() {

@@ -1,11 +1,21 @@
-var ypm;
+function createScript(url) {
+	const elem = document.createElement("script");
+	elem.src = url;
+	elem.type = "module";
+	return elem;
+}
+
+const autoPlayScript = createScript(chrome.runtime.getURL("scripts/autoplay.js"));
+const autoPauseScript = createScript(chrome.runtime.getURL("scripts/autopause.js"));
 
 function setAutoplay(autoplay) {
-	if (!ypm) {
-		ypm = document.getElementsByTagName('yt-playlist-manager')[0];
-	}
-	if (ypm) {
-		ypm.TEST_ONLY.setCanAutoAdvance(autoplay);
+	autoPlayScript.remove();
+	autoPauseScript.remove();
+
+	if (autoplay) {
+		document.body.append(autoPlayScript);
+	} else {
+		document.body.append(autoPauseScript);
 	}
 }
 

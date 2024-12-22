@@ -28,6 +28,12 @@
 			"run_at": "document_end"
 		}
 	],
+	"web_accessible_resources": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "resources": ["scripts/*.js"]
+    }
+  ],
 	"description": "When you finish a video in a playlist, the next video won't start unless you click on it.\nYou can toggle this on and off.",
 	"icons": {
 		"128": "icons/Logo-128.png"
