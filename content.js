@@ -1,26 +1,12 @@
-var script;
+var ypm;
 
 function setAutoplay(autoplay) {
-	if (script) {
-		script.parentNode.removeChild(script);
+	if (!ypm) {
+		ypm = document.getElementsByTagName('yt-playlist-manager')[0];
 	}
-
-	script = document.createElement("script");
-	script.id = "npafy-script";
-	script.type = "text/javascript";
-	script.innerText = `
-		(function() {
-			var ypm;
-			if (!ypm) {
-				ypm = document.getElementsByTagName('yt-playlist-manager')[0];
-			}
-			if (ypm) {
-				ypm.TEST_ONLY.setCanAutoAdvance(${autoplay});
-			}
-		})();
-	`;
-
-	document.body.appendChild(script);
+	if (ypm) {
+		ypm.TEST_ONLY.setCanAutoAdvance(autoplay);
+	}
 }
 
 function checkAutoplay() {

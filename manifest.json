@@ -1,12 +1,12 @@
 {
-	"manifest_version": 2,
+	"manifest_version": 3,
 
 	"author": "Thomas Richards",
 	"background": {
-		"persistent": false,
-		"scripts": [ "background.js" ]
+		"service_worker": "background.js",
+		"type": "module"
 	},
-	"browser_action": {
+	"action": {
 		"default_icon": {
 			"128": "icons/Pause-128.png",
 			"64": "icons/Pause-64.png",
@@ -15,7 +15,7 @@
 		"default_title": "Toggle YouTube Playlist Autoplay"
 	},
 	"commands": {
-		"_execute_browser_action": {
+		"_execute_action": {
 			"suggested_key": {
 				"default": "Ctrl+Shift+Y"
 			}
@@ -34,6 +34,7 @@
 	},
 	"name": "No Playlist Autoplay For YouTube",
 	"options_page": "options.html",
-	"permissions": ["storage", "*://*.youtube.com/*"],
+	"permissions": ["storage"],
+	"host_permissions": ["*://*.youtube.com/*"],
 	"version": "65535.65535.65535.12"
 }
