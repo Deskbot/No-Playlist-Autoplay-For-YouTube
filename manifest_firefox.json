@@ -1,0 +1,47 @@
+{
+	"manifest_version": 3,
+
+	"author": "Thomas Richards",
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false,
+		"type": "module"
+	},
+	"action": {
+		"default_icon": {
+			"128": "icons/Pause-128.png",
+			"64": "icons/Pause-64.png",
+			"32": "icons/Pause-32.png"
+		},
+		"default_title": "Toggle YouTube Playlist Autoplay"
+	},
+	"commands": {
+		"_execute_action": {
+			"suggested_key": {
+				"default": "Ctrl+Shift+Y"
+			}
+		}
+	},
+	"content_scripts": [
+		{
+			"matches": ["*://*.youtube.com/*"],
+			"js": ["content.js"],
+			"run_at": "document_end"
+		}
+	],
+	"web_accessible_resources": [
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "resources": ["scripts/*.js"]
+    }
+  ],
+	"description": "When you finish a video in a playlist, the next video won't start unless you click on it.\nYou can toggle this on and off.",
+	"icons": {
+		"128": "icons/Logo-128.png"
+	},
+	"name": "No Playlist Autoplay For YouTube",
+	"options_page": "options.html",
+	"permissions": ["storage"],
+	"host_permissions": ["*://*.youtube.com/*"],
+	"version": "65535.65535.65535.12"
+}
