@@ -1,7 +1,6 @@
 function createScript(url) {
 	const elem = document.createElement("script");
 	elem.src = url;
-	elem.type = "module";
 	return elem;
 }
 
@@ -10,10 +9,10 @@ let autoPauseScript;
 
 function setAutoplay(autoplay) {
 	if (autoPlayScript) {
-		// autoPlayScript.remove();
+		autoPlayScript.remove();
 	}
 	if (autoPauseScript) {
-		// autoPauseScript.remove();
+		autoPauseScript.remove();
 	}
 
 	if (autoplay) {
@@ -39,6 +38,6 @@ chrome.storage.local.get(['frequency']).then((result) => {
 		frequency = 500; // sometimes the data is lost by chrome
 	}
 
-	// setInterval(checkAutoplay, frequency); // make sure nothing switches it back
+	setInterval(checkAutoplay, frequency); // make sure nothing switches it back
 	checkAutoplay();
 })
