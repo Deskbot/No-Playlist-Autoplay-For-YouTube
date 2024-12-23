@@ -5,16 +5,22 @@ function createScript(url) {
 	return elem;
 }
 
-const autoPlayScript = createScript(chrome.runtime.getURL("scripts/autoplay.js"));
-const autoPauseScript = createScript(chrome.runtime.getURL("scripts/autopause.js"));
+let autoPlayScript;
+let autoPauseScript;
 
 function setAutoplay(autoplay) {
-	autoPlayScript.remove();
-	autoPauseScript.remove();
+	if (autoPlayScript) {
+		// autoPlayScript.remove();
+	}
+	if (autoPauseScript) {
+		// autoPauseScript.remove();
+	}
 
 	if (autoplay) {
+		autoPlayScript = createScript(chrome.runtime.getURL("scripts/autoplay.js"));
 		document.body.append(autoPlayScript);
 	} else {
+		autoPauseScript = createScript(chrome.runtime.getURL("scripts/autopause.js"));
 		document.body.append(autoPauseScript);
 	}
 }
@@ -33,6 +39,6 @@ chrome.storage.local.get(['frequency'], function (result) {
 		frequency = 500; // sometimes the data is lost by chrome
 	}
 
-	setInterval(checkAutoplay, frequency); // make sure nothing switches it back
+	// setInterval(checkAutoplay, frequency); // make sure nothing switches it back
 	checkAutoplay();
 })
