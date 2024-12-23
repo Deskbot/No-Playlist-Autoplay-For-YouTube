@@ -26,12 +26,12 @@ function setAutoplay(autoplay) {
 }
 
 function checkAutoplay() {
-	chrome.storage.local.get(['autoplay'], function (result) {
+	chrome.storage.local.get(['autoplay']).then((result) => {
 		setAutoplay(result.autoplay);
 	})
 }
 
-chrome.storage.local.get(['frequency'], function (result) {
+chrome.storage.local.get(['frequency']).then((result) => {
 	var frequency = result.frequency;
 	if (frequency) {
 		frequency = frequency < 250 ? 250 : frequency;
