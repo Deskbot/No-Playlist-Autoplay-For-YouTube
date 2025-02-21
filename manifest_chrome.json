@@ -42,5 +42,5 @@
 	"options_page": "options.html",
 	"permissions": ["storage"],
 	"host_permissions": ["*://*.youtube.com/*"],
-	"version": "65535.65535.65535.13"
+	"version": "65535.65535.65535.14"
 }
